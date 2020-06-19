@@ -1,9 +1,9 @@
 from random import randint as __randint
 
 # Roll method
-def roll(dCount, dSides, quiet=False):
+def roll(dCount, dSides, modifier=0, quiet=False):
 
-    if (not quiet): print("\nRolling " + str(dCount) + "d" + str(dSides) + "...")
+    if (not quiet): print("Rolling " + str(dCount) + "d" + str(dSides) + "...")
 
     # Define list of rolls
     dRolls = list()
@@ -22,14 +22,19 @@ def roll(dCount, dSides, quiet=False):
         dTotal += dRoll
         if (not quiet): print(" " + str(dRoll), end="")
 
+    # Adding modifier, if any
+    if (modifier != 0):
+        dTotal += modifier
+        if (not quiet): print("\nAdding modifier: " + str(modifier))
+
     # Print the total
-    if (not quiet): print("\n\nTotal: " + str(dTotal))
+    if (not quiet): print("\nTotal: " + str(dTotal))
 
     # Return total
     return dTotal
 
 # Method to roll multiple different dice types
-def multiRoll(dRollOrders, quiet=False):
+def multiRoll(dRollOrders, modifier=0, quiet=False):
 
     if (not quiet): print("Rolling dice...")
 
@@ -40,25 +45,35 @@ def multiRoll(dRollOrders, quiet=False):
     for dRollOrder in dRollOrders:
         dTotal += roll(dRollOrder[0], dRollOrder[1])
     
+    # Adding modifier, if any
+    if (modifier != 0):
+        dTotal += modifier
+        if (not quiet): print("\nAdding modifier: " + str(modifier))
+
     # Print total
-    if (not quiet): print("Multiroll Total: " + str(dTotal))
+    if (not quiet): print("\nMultiroll Total: " + str(dTotal))
 
     # return total
     return dTotal
 
 # Method to calculate average roll
-def calculateAverage(dCount, dSides, quiet=False):
+def calculateAverage(dCount, dSides, modifier=0, quiet=False):
 
     # Calculate average
     dAverage = dCount * ((dSides/2) + 0.5)
 
+    # Adding modifier, if any
+    if (modifier != 0):
+        dAverage += modifier
+        if (not quiet): print("\nAdding modifier: " + str(modifier))
+
     # Print average
-    if (not quiet): print("Average: " + str(dAverage))
+    if (not quiet): print("\nAverage: " + str(dAverage))
 
     # return Average
     return dAverage
 
-def calculateMultiAverage(dRollOrders, quiet=False):
+def calculateMultiAverage(dRollOrders, modifier=0, quiet=False):
     
     # Define variable to hold total average
     dTotalAverage = 0
@@ -67,8 +82,13 @@ def calculateMultiAverage(dRollOrders, quiet=False):
     for dRollOrder in dRollOrders:
         dTotalAverage += calculateAverage(dRollOrder[0], dRollOrder[1], quiet=True)
     
+    # Adding modifier, if any
+    if (modifier != 0):
+        dTotalAverage += modifier
+        if (not quiet): print("\nAdding modifier: " + str(modifier))
+
     # Print total average
-    if (not quiet): print("Total average: " + str(dTotalAverage))
+    if (not quiet): print("\nTotal average: " + str(dTotalAverage))
 
     # return total average
     return dTotalAverage

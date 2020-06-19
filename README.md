@@ -21,5 +21,7 @@ Calculates the average of a roll
 
 Calculates the average of multiple rolls
 
+---
+All methods have the option to supress messages by passing `quiet=True` as an additional argument
 
-All methods have the option to supress messages by passing `quiet=True` as an additional argument 
+Additionally you can add a `modifier=<number>` to add a number to the result
