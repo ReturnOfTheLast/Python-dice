@@ -1,9 +1,9 @@
 from random import randint as __randint
 
 # Roll method
-def roll(dCount, dSides):
+def roll(dCount, dSides, quiet=False):
 
-    print("\nRolling " + str(dCount) + "d" + str(dSides) + "...")
+    if (not quiet): print("\nRolling " + str(dCount) + "d" + str(dSides) + "...")
 
     # Define list of rolls
     dRolls = list()
@@ -15,23 +15,23 @@ def roll(dCount, dSides):
     # Define variable to hold total
     dTotal = 0
 
-    print("Rolls:", end="")
+    if (not quiet): print("Rolls:", end="")
 
     # Calculate total and print rolls
     for dRoll in dRolls:
         dTotal += dRoll
-        print(" " + str(dRoll), end="")
+        if (not quiet): print(" " + str(dRoll), end="")
 
     # Print the total
-    print("\n\nTotal: " + str(dTotal))
+    if (not quiet): print("\n\nTotal: " + str(dTotal))
 
     # Return total
     return dTotal
 
 # Method to roll multiple different dice types
-def multiRoll(dRollOrders):
+def multiRoll(dRollOrders, quiet=False):
 
-    print("\nRolling dice...\n")
+    if (not quiet): print("Rolling dice...")
 
     # Define variable to hold total
     dTotal = 0
@@ -41,13 +41,34 @@ def multiRoll(dRollOrders):
         dTotal += roll(dRollOrder[0], dRollOrder[1])
     
     # Print total
-    print("\n\n\nMultiroll Total: " + str(dTotal))
+    if (not quiet): print("Multiroll Total: " + str(dTotal))
+
+    # return total
+    return dTotal
 
 # Method to calculate average roll
-def calculateAverage(dCount, dSides):
+def calculateAverage(dCount, dSides, quiet=False):
 
     # Calculate average
     dAverage = dCount * ((dSides/2) + 0.5)
 
     # Print average
-    print("Average: " + str(dAverage))
+    if (not quiet): print("Average: " + str(dAverage))
+
+    # return Average
+    return dAverage
+
+def calculateMultiAverage(dRollOrders, quiet=False):
+    
+    # Define variable to hold total average
+    dTotalAverage = 0
+
+    # Go through and calculate each average
+    for dRollOrder in dRollOrders:
+        dTotalAverage += calculateAverage(dRollOrder[0], dRollOrder[1], quiet=True)
+    
+    # Print total average
+    if (not quiet): print("Total average: " + str(dTotalAverage))
+
+    # return total average
+    return dTotalAverage
