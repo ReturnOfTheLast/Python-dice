@@ -1,7 +1,7 @@
 from random import randint as __randint
 
 # Roll method
-def roll(dCount, dSides, modifier=0, quiet=False):
+def roll(dCount, dSides, modifier=0, quiet=False, dropLow=0, dropHigh=0):
 
     if (not quiet): print("Rolling " + str(dCount) + "d" + str(dSides) + "...")
 
@@ -11,6 +11,19 @@ def roll(dCount, dSides, modifier=0, quiet=False):
     # Roll one die at a time and add it to the dRolls list
     for _ in range(dCount):
         dRolls.append(__randint(1, dSides))
+
+    #sort list
+    dRolls.sort()
+
+    # drop lowest
+    if (dropLow > 0):
+        if (not quiet): print("Dropped: " + str(dRolls[:dropLow]))
+        dRolls = dRolls[dropLow:]
+
+    # drop highest
+    if (dropHigh > 0):
+        if (not quiet): print("Dropped: " + str(dRolls[-dropHigh:]))
+        dRolls = dRolls[:-dropHigh]
 
     # Define variable to hold total
     dTotal = 0
@@ -44,7 +57,7 @@ def multiRoll(dRollOrders, modifier=0, quiet=False):
     # Go through and roll all the dice
     for dRollOrder in dRollOrders:
         dTotal += roll(dRollOrder[0], dRollOrder[1])
-    
+
     # Adding modifier, if any
     if (modifier != 0):
         dTotal += modifier
@@ -74,14 +87,14 @@ def calculateAverage(dCount, dSides, modifier=0, quiet=False):
     return dAverage
 
 def calculateMultiAverage(dRollOrders, modifier=0, quiet=False):
-    
+
     # Define variable to hold total average
     dTotalAverage = 0
 
     # Go through and calculate each average
     for dRollOrder in dRollOrders:
         dTotalAverage += calculateAverage(dRollOrder[0], dRollOrder[1], quiet=True)
-    
+
     # Adding modifier, if any
     if (modifier != 0):
         dTotalAverage += modifier
@@ -92,3 +105,10 @@ def calculateMultiAverage(dRollOrders, modifier=0, quiet=False):
 
     # return total average
     return dTotalAverage
+
+def rollAbilityScore(amount=6):
+    scores = list()
+    for _ in range(amount):
+        scores.append(roll(4, 6, dropLow=1, quiet=True))
+    scores.sort()
+    print(scores)
