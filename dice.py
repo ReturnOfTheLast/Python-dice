@@ -44,7 +44,7 @@ def roll(dCount, dSides, modifier=0, quiet=False, dropLow=0, dropHigh=0):
     if (not quiet): print("\nTotal: " + str(dTotal))
 
     # Return total
-    return dTotal
+    if (quiet): return dTotal
 
 # Method to roll multiple different dice types
 def multiRoll(dRollOrders, modifier=0, quiet=False):
@@ -67,7 +67,7 @@ def multiRoll(dRollOrders, modifier=0, quiet=False):
     if (not quiet): print("\nMultiroll Total: " + str(dTotal))
 
     # return total
-    return dTotal
+    if (quiet): return dTotal
 
 # Method to calculate average roll
 def calculateAverage(dCount, dSides, modifier=0, quiet=False):
@@ -84,7 +84,7 @@ def calculateAverage(dCount, dSides, modifier=0, quiet=False):
     if (not quiet): print("\nAverage: " + str(dAverage))
 
     # return Average
-    return dAverage
+    if (quiet): return dAverage
 
 def calculateMultiAverage(dRollOrders, modifier=0, quiet=False):
 
@@ -104,7 +104,7 @@ def calculateMultiAverage(dRollOrders, modifier=0, quiet=False):
     if (not quiet): print("\nTotal average: " + str(dTotalAverage))
 
     # return total average
-    return dTotalAverage
+    if (quiet): return dTotalAverage
 
 def rollAbilityScore(amount=6):
     scores = list()
